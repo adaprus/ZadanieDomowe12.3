@@ -12,26 +12,34 @@ class Timing implements TimingChangeable {
     }
 
     public Timing(int timing, int normalTemperature, int criticalTemperature, int maxTiming) {
-        checkTimingPreconditions(timing, normalTemperature, criticalTemperature, maxTiming);
-        this.timing = timing;
-        this.normalTemperature = normalTemperature;
-        this.criticalTemperature = criticalTemperature;
-        this.maxTiming = maxTiming;
+        setTiming(timing);
+        setNormalTemperature(normalTemperature);
+        setCriticalTemperature(criticalTemperature);
+        setMaxTiming(maxTiming);
     }
 
-    private void checkTimingPreconditions(int timing, int normalTemperature, int criticalTemperature, int maxTiming) {
+    private void checkTimingPreconditions(int timing) {
         if (timing < 0) {
             throw new IllegalArgumentException("Taktowanie musi być dodatnie");
-        } else if (normalTemperature < 0) {
-            throw new IllegalArgumentException("Temperatura pracy musi być dodatnia");
-        } else if (criticalTemperature < normalTemperature) {
-            throw new IllegalArgumentException("Temperatura krytyczna nie może być mniejsza od temperatury pracy normalnej");
-        } else if (maxTiming < normalTemperature) {
-            throw new IllegalArgumentException("Taktowanie maksymalne musi mieć wartość wyższą od normalnego taktowania");
         }
     }
 
-    public Timing() {
+    private void checkNormalTemperaturePreconditions(int normalTemperature) {
+        if (normalTemperature < 0) {
+            throw new IllegalArgumentException("Temperatura pracy musi być dodatnia");
+        }
+    }
+
+    private void checkCriticalTemperaturePreconditions(int criticalTemperature) {
+        if (criticalTemperature < normalTemperature) {
+            throw new IllegalArgumentException("Temperatura krytyczna nie może być mniejsza od temperatury pracy normalnej");
+        }
+    }
+
+    private void checkMaxTimingPreconditions(int maxTiming) {
+        if (maxTiming < timing) {
+            throw new IllegalArgumentException("Taktowanie maksymalne musi mieć wartość wyższą od normalnego taktowania");
+        }
     }
 
     public int getTiming() {
@@ -39,6 +47,7 @@ class Timing implements TimingChangeable {
     }
 
     public void setTiming(int timing) {
+        checkTimingPreconditions(timing);
         this.timing = timing;
     }
 
@@ -47,6 +56,7 @@ class Timing implements TimingChangeable {
     }
 
     public void setNormalTemperature(int normalTemperature) {
+        checkNormalTemperaturePreconditions(normalTemperature);
         this.normalTemperature = normalTemperature;
     }
 
@@ -55,6 +65,7 @@ class Timing implements TimingChangeable {
     }
 
     public void setCriticalTemperature(int criticalTemperature) {
+        checkCriticalTemperaturePreconditions(criticalTemperature);
         this.criticalTemperature = criticalTemperature;
     }
 
@@ -63,6 +74,7 @@ class Timing implements TimingChangeable {
     }
 
     public void setMaxTiming(int maxTiming) {
+        checkMaxTimingPreconditions(maxTiming);
         this.maxTiming = maxTiming;
     }
 }

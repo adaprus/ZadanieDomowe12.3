@@ -3,22 +3,26 @@ public class Computer {
     private Ram ram;
     private HardDrive hardDrive;
 
-    public Computer() {
-    }
-
     public Computer(Processor processor, Ram ram, HardDrive hardDrive) {
-        computerPreconditions(processor, ram, hardDrive);
-        this.processor = processor;
-        this.ram = ram;
-        this.hardDrive = hardDrive;
+        setProcessor(processor);
+        setRam(ram);
+        setHardDrive(hardDrive);
     }
 
-    private void computerPreconditions(Processor processor, Ram ram, HardDrive hardDrive) {
+    private void computerProcessorPreconditions(Processor processor) {
         if (processor == null) {
             throw new NullPointerException("Komputer musi mieć przypisany procesor");
-        } else if (ram == null) {
+        }
+    }
+
+    private void computerRamPreconditions(Ram ram) {
+        if (ram == null) {
             throw new NullPointerException("Komputer musi mieć przypisaną pamięć RAM");
-        } else if (hardDrive == null) {
+        }
+    }
+
+    private void computerHardDrivePreconditions(HardDrive hardDrive) {
+        if (hardDrive == null) {
             throw new NullPointerException("Komputer musi mieć przypisany dysk twardy");
         }
     }
@@ -28,6 +32,7 @@ public class Computer {
     }
 
     public void setProcessor(Processor processor) {
+        computerProcessorPreconditions(processor);
         this.processor = processor;
     }
 
@@ -36,6 +41,7 @@ public class Computer {
     }
 
     public void setRam(Ram ram) {
+        computerRamPreconditions(ram);
         this.ram = ram;
     }
 
@@ -44,6 +50,7 @@ public class Computer {
     }
 
     public void setHardDrive(HardDrive hardDrive) {
+        computerHardDrivePreconditions(hardDrive);
         this.hardDrive = hardDrive;
     }
 }
