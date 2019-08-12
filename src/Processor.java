@@ -2,7 +2,7 @@ public class Processor extends Part implements TimingChangeable {
     private Timing timing;
     private static final int TEMPERATURE_RAISE = 10;
 
-    public Processor(String name, String producer, String serialNumber, Timing timing) throws PartSerialNumberUndefinedExceptions, PartProducerUndefinedExeptions, PartNameUndefinedExeptions {
+    public Processor(String name, String producer, String serialNumber, Timing timing) throws PartSerialNumberUndefinedExceptions, PartProducerUndefinedExceptions, PartNameUndefinedExeptions {
         super(name, producer, serialNumber);
         setTiming(timing);
     }

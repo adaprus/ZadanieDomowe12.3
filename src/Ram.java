@@ -3,22 +3,10 @@ public class Ram extends Part implements TimingChangeable {
     private int memory;
     private static final int TEMPERATURE_RAISE = 15;
 
-    public Ram(String name, String producer, String serialNumber, Timing timing, int memory) throws PartSerialNumberUndefinedExceptions, PartProducerUndefinedExeptions, PartNameUndefinedExeptions {
+    public Ram(String name, String producer, String serialNumber, Timing timing, int memory) throws PartSerialNumberUndefinedExceptions, PartProducerUndefinedExceptions, PartNameUndefinedExeptions {
         super(name, producer, serialNumber);
         setTiming(timing);
         setMemory(memory);
-    }
-
-    private void checkRamMemoryPreconditions(int memory) {
-        if (memory < 0) {
-            throw new IllegalArgumentException("Pamięć RAM musi mieć wartość większą niż 0");
-        }
-    }
-
-    private void checkRamTiming(Timing timing) {
-        if (timing == null) {
-            throw new NullPointerException("Pamięć RAM musi mieć przypisane taktowanie");
-        }
     }
 
     public Timing getTiming() {
@@ -26,7 +14,9 @@ public class Ram extends Part implements TimingChangeable {
     }
 
     public void setTiming(Timing timing) {
-        checkRamTiming(timing);
+        if (timing == null) {
+            throw new NullPointerException("Pamięć RAM musi mieć przypisane taktowanie");
+        }
         this.timing = timing;
     }
 
@@ -35,7 +25,9 @@ public class Ram extends Part implements TimingChangeable {
     }
 
     public void setMemory(int memory) {
-        checkRamMemoryPreconditions(memory);
+        if (memory < 0) {
+            throw new IllegalArgumentException("Pamięć RAM musi mieć wartość większą niż 0");
+        }
         this.memory = memory;
     }
 

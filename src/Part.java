@@ -3,34 +3,10 @@ public abstract class Part {
     private String producer;
     private String serialNumber;
 
-    public Part(String name, String producer, String serialNumber) throws PartSerialNumberUndefinedExceptions, PartNameUndefinedExeptions, PartProducerUndefinedExeptions {
+    public Part(String name, String producer, String serialNumber) throws PartSerialNumberUndefinedExceptions, PartNameUndefinedExeptions, PartProducerUndefinedExceptions {
         setName(name);
         setProducer(producer);
         setSerialNumber(serialNumber);
-    }
-
-    public void checkNamePartPreconditions(String name) throws PartNameUndefinedExeptions {
-        if (name == null) {
-            throw new NullPointerException("Podaj nazwę części");
-        } else if (name.length() < 3) {
-            throw new PartNameUndefinedExeptions();
-        }
-    }
-
-    public void checkPartSerialNumberUndefinedPreconditions(String serialNumber) throws PartSerialNumberUndefinedExceptions {
-        if (serialNumber == null) {
-            throw new NullPointerException("Podaj numer seryjny");
-        } else if (serialNumber.length() < 5) {
-            throw new PartSerialNumberUndefinedExceptions();
-        }
-    }
-
-    public void checkProducerPartPreconditions(String producer) throws PartProducerUndefinedExeptions {
-        if (producer == null) {
-            throw new NullPointerException("Podaj producenta");
-        } else if (producer.length() < 3) {
-            throw new PartProducerUndefinedExeptions();
-        }
     }
 
     public String getName() {
@@ -38,7 +14,11 @@ public abstract class Part {
     }
 
     public void setName(String name) throws PartNameUndefinedExeptions {
-        checkNamePartPreconditions(name);
+        if (name == null) {
+            throw new NullPointerException("Podaj nazwę części");
+        } else if (name.length() < 3) {
+            throw new PartNameUndefinedExeptions();
+        }
         this.name = name;
     }
 
@@ -46,8 +26,12 @@ public abstract class Part {
         return producer;
     }
 
-    public void setProducer(String producer) throws PartProducerUndefinedExeptions {
-        checkProducerPartPreconditions(producer);
+    public void setProducer(String producer) throws PartProducerUndefinedExceptions {
+        if (producer == null) {
+            throw new NullPointerException("Podaj producenta");
+        } else if (producer.length() < 3) {
+            throw new PartProducerUndefinedExceptions();
+        }
         this.producer = producer;
     }
 
@@ -56,7 +40,11 @@ public abstract class Part {
     }
 
     public void setSerialNumber(String serialNumber) throws PartSerialNumberUndefinedExceptions {
-        checkPartSerialNumberUndefinedPreconditions(serialNumber);
+        if (serialNumber == null) {
+            throw new NullPointerException("Podaj numer seryjny");
+        } else if (serialNumber.length() < 5) {
+            throw new PartSerialNumberUndefinedExceptions();
+        }
         this.serialNumber = serialNumber;
     }
 }

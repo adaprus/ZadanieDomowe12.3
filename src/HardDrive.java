@@ -1,15 +1,9 @@
 public class HardDrive extends Part {
     private int capacity;
 
-    public HardDrive(String name, String producer, String serialNumber, int capacity) throws PartSerialNumberUndefinedExceptions, PartProducerUndefinedExeptions, PartNameUndefinedExeptions {
+    public HardDrive(String name, String producer, String serialNumber, int capacity) throws PartSerialNumberUndefinedExceptions, PartProducerUndefinedExceptions, PartNameUndefinedExeptions {
         super(name, producer, serialNumber);
         setCapacity(capacity);
-    }
-
-    private void checkCapacityPreconditions(int capacity) {
-        if (capacity < 0) {
-            throw new IllegalArgumentException("Pojemność dysku twardego musi być większa od 0");
-        }
     }
 
     public int getCapacity() {
@@ -17,7 +11,9 @@ public class HardDrive extends Part {
     }
 
     public void setCapacity(int capacity) {
-        checkCapacityPreconditions(capacity);
+        if (capacity < 0) {
+            throw new IllegalArgumentException("Pojemność dysku twardego musi być większa od 0");
+        }
         this.capacity = capacity;
     }
 }

@@ -13,7 +13,7 @@ public class Test {
             processor.raiseTiming(60);
 
         } catch (NullPointerException | IllegalArgumentException | PartNameUndefinedExeptions |
-                PartProducerUndefinedExeptions | PartSerialNumberUndefinedExceptions e) {
+                PartProducerUndefinedExceptions | PartSerialNumberUndefinedExceptions e) {
             System.out.println(e.getMessage());
         }
     }
